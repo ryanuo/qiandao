@@ -21,9 +21,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install requests lxml
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - name: 'run get price script'
-      env:
-        COOKIE: ${{ secrets.COOKIE }}
-        ADRESS: ${{ secrets.ADRESS }}
-        Name: ${{ secrets.NAME }}
+    - name: 'run py'
+#      env:
+#        COOKIE: ${{ secrets.COOKIE }}
+#        ADRESS: ${{ secrets.ADRESS }}
+#        Name: ${{ secrets.NAME }}
       run: python csdn.py
