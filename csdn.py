@@ -27,3 +27,37 @@ data = {
 
 r = requests.post("https://me.csdn.net/api/LuckyDraw_v2/signIn",headers=headers,data=data).content.decode("unicode_escape")
 print(r)
+
+import time
+import hmac
+import hashlib
+import base64
+import urllib.parse
+
+timestamp = str(round(time.time() * 1000))
+secret = 'Maxcsdn'
+secret_enc = secret.encode('utf-8')
+string_to_sign = '{}\n{}'.format(timestamp, secret)
+string_to_sign_enc = string_to_sign.encode('utf-8')
+hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+
+import requests,json
+
+#导入依赖库
+headers={'Content-Type': 'application/json'}   #定义数据类型
+#截至到&timestamp之前
+webhook = 'https://oapi.dingtalk.com/robot/send?access_token=05db0b7c11749c484938cd4175354aab332bb0e90b24d078c89506b36a994b80&timestamp='+timestamp+"&sign="+sign
+#定义要发送的数据
+#"at": {"atMobiles": "['"+ mobile + "']"
+data = {
+    #定义内容
+"msgtype": "markdown",
+     "markdown": {
+         "title":"CSDN签到通知",
+         "text": ">CSDN 签到已成功\n - 签到详情:" + "\n"+ r
+     }
+      }
+res = requests.post(webhook, data=json.dumps(data), headers=headers)   #发送post请求
+
+print(res.text)
