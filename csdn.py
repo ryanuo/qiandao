@@ -35,7 +35,7 @@ import base64
 import urllib.parse
 
 timestamp = str(round(time.time() * 1000))
-secret = Maxcsdn
+secret = 'SEC522cee2d86482c3cca0ba4331e45141a41bcdad5780bb1d5a5a78895e62b988d'
 secret_enc = secret.encode('utf-8')
 string_to_sign = '{}\n{}'.format(timestamp, secret)
 string_to_sign_enc = string_to_sign.encode('utf-8')

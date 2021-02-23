@@ -22,8 +22,8 @@ jobs:
         pip install requests lxml
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: 'run py'
-      env:
-        Maxcsdn: ${{ secrets.Maxcsdn }}
+#      env:
+#        Maxcsdn: ${{ secrets.Maxcsdn }}
 #        ADRESS: ${{ secrets.ADRESS }}
 #        Name: ${{ secrets.NAME }}
       run: python csdn.py
