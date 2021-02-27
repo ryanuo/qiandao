@@ -71,7 +71,7 @@ if isSign:
     "msgtype": "markdown",
      "markdown": {
          "title":"CSDN签到通知",
-         "text": ">CSDN 签到已成功\n - 签到详情:" + "\n" + t + "\n" + '项目地址：https://github.com/Rr210/qiandao'
+         "text": ">CSDN 签到已成功\n - 签到详情:" + t + "\n⭐项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
      }
       }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)   #发送post请求
@@ -82,7 +82,7 @@ else:
         "msgtype": "markdown",
         "markdown": {
             "title": "CSDN签到通知",
-            "text": "签到失败" + '\n 签到详情' + t
+            "text": "签到失败" + '\n 签到详情' + t + "\n项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
         }
     }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
