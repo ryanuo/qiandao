@@ -26,4 +26,5 @@ jobs:
         COOKIE: ${{ secrets.COOKIE }}
         ADRESS: ${{ secrets.USERNAME }}
         DDSECRET: ${{ secrets.DDSECRET }}
+        DDPOSTRUL: ${{ secrets.DDPOSTURL }}
       run: python csdn.py
