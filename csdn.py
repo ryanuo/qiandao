@@ -1,8 +1,8 @@
 import requests
 import os  #加入环境变量
 if __name__ == '__main__':
-    COOKIE = os.environ["COOKIE"]
-    USERNAME = os.environ["USERNAME"]
+    COOKIE = os.environ["COOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
+    USERNAME = os.environ["USERNAME"]  # 这里是’CSDN‘的用户名，链接后面的
     DDSECRET = os.environ["DDSECRET"]  # 钉钉通知加签
     DDPOSTURL = os.environ["DDPOSTURL"]  # 钉钉通知机器人的链接地址
 
@@ -33,17 +33,18 @@ data = {
 }
 
 r = requests.post("https://me.csdn.net/api/LuckyDraw_v2/signIn",headers=headers,data=data).content.decode("unicode_escape")
-print(r)
+print(r)  # 输出结果
 import json
 timedata = json.loads(r)
 # 将json转化为数组形式
 print(timedata)
 isSign = timedata['data']['isSigned']
-# print(isSign) #返回签到是否成功
+# print(isSign) #返回签到逻辑值
 t = timedata['data']['msg']
+print(t)  # 返回签到结果
 
 
-# 通知模块
+# 钉钉通知模块
 import time
 import hmac
 import hashlib
@@ -70,7 +71,7 @@ if isSign:
     "msgtype": "markdown",
      "markdown": {
          "title":"CSDN签到通知",
-         "text": ">CSDN 签到已成功\n - 签到详情:" + "\n"+ t
+         "text": ">CSDN 签到已成功\n - 签到详情:" + "\n" + t + "\n" + '项目地址：https://github.com/Rr210/qiandao'
      }
       }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)   #发送post请求
@@ -81,7 +82,7 @@ else:
         "msgtype": "markdown",
         "markdown": {
             "title": "CSDN签到通知",
-            "text": "签到失败" + t
+            "text": "签到失败" + '\n 签到详情' + t
         }
     }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求

@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 start
+    if: github.event.repository.owner.id == github.event.sender.id  # 自己点的 start,测试完记得注释掉
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
