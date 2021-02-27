@@ -24,7 +24,7 @@ jobs:
     - name: 'run py'
       env:
         COOKIE: ${{ secrets.COOKIE }}
-        ADRESS: ${{ secrets.USERNAME }}
+        USERNAME: ${{ secrets.USERNAME }}
         DDSECRET: ${{ secrets.DDSECRET }}
         DDPOSTRUL: ${{ secrets.DDPOSTURL }}
       run: python csdn.py
