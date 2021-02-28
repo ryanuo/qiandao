@@ -38,7 +38,7 @@ import json
 timedata = json.loads(r)
 # 将json转化为数组形式
 print(timedata)
-isSign = timedata['data']['isSigned']
+isSign = timedata['data']['signed']
 # print(isSign) #返回签到逻辑值
 t = timedata['data']['msg']
 print(t)  # 返回签到结果
@@ -82,7 +82,7 @@ else:
         "msgtype": "markdown",
         "markdown": {
             "title": "CSDN签到通知",
-            "text": "签到失败" + '\n 签到详情' + t + "\n项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+            "text": ">CSDN 签到失败\n - 签到详情:"+ timedata + "\n项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
         }
     }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
