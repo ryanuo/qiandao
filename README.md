@@ -2,12 +2,14 @@
 
 1. Python+GitHub实现CSDN的自动签到，并用钉钉机器人通知
 2. 满足抽奖条件执行抽奖操作
+3. 网易云音乐签到
 
 ## 仓库文件介绍
 
 1. csdn.py 没有抽奖的操作，只有签到
 2. csdn1.py 包括抽奖和签到
 3. csdnlucky.py 是只有抽奖的操作
+4. wyy.py 网页端网易云签到
 
 ## 签到内容
 
@@ -34,6 +36,8 @@
 | DDPOSTURL | 钉钉群机器人的webhook地址，参考钉钉[官方文档](https://developers.dingtalk.com/document/app/custom-robot-access) |
 | DDSECRET  |                  设置钉钉机器人时的加签密钥                  |
 | LUCKYCOOLKIE| 执行抽奖时所需的COOKIR，获取方法与签到的cookie相同|
+| WYYCOOKIE| 获取方法相同|
+| WYYCSRFTOKEN| 在控制台获取 csrf_token 的值|
 
 ## 设置定时
 
