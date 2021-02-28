@@ -1,8 +1,6 @@
 import requests
 import os
-if __name__ == '__main__':
-    LUCKYCOOKIE = os.environ["LUCKYCOOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
-    USERNAME = os.environ["USERNAME"]  # 这里是’CSDN‘的用户名，链接后面的
+from csdn1 import LUCKYCOOKIE, USERNAME
 # 第一步获取请求数据
 headers = {
     'accept': 'application/json, text/plain, */*',

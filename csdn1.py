@@ -5,6 +5,8 @@ if __name__ == '__main__':
     USERNAME = os.environ["USERNAME"]  # 这里是’CSDN‘的用户名，链接后面的
     DDSECRET = os.environ["DDSECRET"]  # 钉钉通知加签
     DDPOSTURL = os.environ["DDPOSTURL"]  # 钉钉通知机器人的链接地址
+    LUCKYCOOKIE = os.environ["LUCKYCOOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
+
 
 headers = {
     'accept': 'application/json, text/plain, */*',
