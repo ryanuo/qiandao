@@ -68,25 +68,54 @@ headers = {'Content-Type': 'application/json'}  # 定义数据类型
 webhook = DDPOSTURL + timestamp + "&sign=" + sign
 # 定义要发送的数据
 # "at": {"atMobiles": "['"+ mobile + "']"
-if message == '成功':
+if message == '成功' and isSign:
     data = {
     #定义内容
     "msgtype": "markdown",
      "markdown": {
          "title":"CSDN签到通知",
-         "text": ">CSDN 签到已成功\n - 签到详情:" + t + "\n------------⭐项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+         "text": ">您已重复签到,请不要重复操作\n - 签到详情:\n" + t
      }
       }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)   #发送post请求
     print(res.text)
+    # from csdnlucky import option # 测试时使用
+    # print(option)
+
 else:
-    data = {
-        # 定义内容
-        "msgtype": "markdown",
-        "markdown": {
-            "title": "CSDN签到通知",
-            "text": ">CSDN 签到失败\n - 签到详情:"+ timedata + "\n项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+    # 返回签到天数，如果到了5天执行csdnlucky.py
+    signdays = timedata['data']['star']
+    # print(signdays)
+    # 返回抽奖次数
+    draws = timedata['data']['drawTimes']
+    # 加入抽奖判断 执行抽奖
+    if signdays == 5:
+        import os
+        str = ('python csdnlucky.py')  # python命令 + csdnlucky.py
+        p = os.system(str)
+        # print(p)  # 打印执行结果 0表示 success ， 1表示 fail
+        from csdnlucky import option
+        data = {
+            # 定义内容
+            "msgtype": "markdown",
+            "markdown": {
+                "title": "CSDN签到通知",
+                 "text": ">CSDN 签到已成功\n - 签到详情:" + t + "#您的签到天数为："+signdays+"天\n" + "您签到获得star目前为: "+signdays+"个⭐\n" + "您的抽奖次数为:" + draws + "次\n" + "抽奖详情为："+ option +" " "-----⭐项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+            }
         }
-    }
-    res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
-    print(res.text)
+        res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
+        print(res.text)
+    else:
+        data = {
+            # 定义内容
+            "msgtype": "markdown",
+            "markdown": {
+                "title": "CSDN签到通知",
+                "text": ">CSDN 签到已成功\n - 签到详情:" + t + "#您的签到天数为：" + signdays + "天\n" + "您签到获得star目前为: " + signdays + "个⭐\n" + "您的抽奖次数为:" + draws + "次\n" + "-----⭐项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+            }
+        }
+        res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
+        print(res.text)
+
+
+

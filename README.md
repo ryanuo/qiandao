@@ -1,8 +1,13 @@
 ## 仓库简介
 
-1.  Python+GitHub实现CSDN的自动签到，并用钉钉机器人通知
-2. 待更新
+1. Python+GitHub实现CSDN的自动签到，并用钉钉机器人通知
+2. 满足抽奖条件执行抽奖操作
 
+## 仓库文件介绍
+
+1. csdn.py 没有抽奖的操作，只有签到
+2. csdn1.py 包括抽奖和签到
+3. csdnlucky.py 是只有抽奖的操作
 
 ## 签到内容
 
@@ -28,11 +33,12 @@
 | USERNAME  |                       你的CSDN的用户名                       |
 | DDPOSTURL | 钉钉群机器人的webhook地址，参考钉钉[官方文档](https://developers.dingtalk.com/document/app/custom-robot-access) |
 | DDSECRET  |                  设置钉钉机器人时的加签密钥                  |
+| LUCKYCOOLKIE| 执行抽奖时所需的COOKIR，获取方法与签到的cookie相同|
 
 ## 设置定时
 
 1. 将`.github`文件下的`workflows`中的`csdn.yml`中的`corn`的属性值修改
-2. 注意时差mg比我们地区快8个小时
+2. 注意时差`mg`比我们地区快8个小时
 
 
 ## 参考
