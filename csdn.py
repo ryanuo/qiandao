@@ -38,7 +38,8 @@ import json
 timedata = json.loads(r)
 # 将json转化为数组形式
 print(timedata)
-isSign = timedata['data']['signed']
+message = timedata['message']  # 返回签到的结果
+# isSign = timedata['data']['signed']
 # print(isSign) #返回签到逻辑值
 t = timedata['data']['msg']
 print(t)  # 返回签到结果
@@ -65,13 +66,13 @@ headers = {'Content-Type': 'application/json'}  # 定义数据类型
 webhook = DDPOSTURL + timestamp + "&sign=" + sign
 # 定义要发送的数据
 # "at": {"atMobiles": "['"+ mobile + "']"
-if isSign:
+if message == '成功':
     data = {
     #定义内容
     "msgtype": "markdown",
      "markdown": {
          "title":"CSDN签到通知",
-         "text": ">CSDN 签到已成功\n - 签到详情:" + t + "\n⭐项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+         "text": ">CSDN 签到已成功\n - 签到详情:" + t + "\n-----⭐项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
      }
       }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)   #发送post请求
