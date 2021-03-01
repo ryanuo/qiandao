@@ -91,9 +91,11 @@ else:
     # 返回抽奖次数
     draws = timedata['data']['drawTimes']
     # 加入抽奖判断 执行抽奖
+    # 加入签到总天数 condays
+    condays = timedata['data']['serialCount']
     if signdays == 5:
         import os
-        str = ('python csdnlucky.py')  # python命令 + csdnlucky.py
+        strs = ('python csdnlucky.py')  # python命令 + csdnlucky.py
         p = os.system(str)
         # print(p)  # 打印执行结果 0表示 success ， 1表示 fail
         from csdnlucky import option
@@ -102,7 +104,7 @@ else:
             "msgtype": "markdown",
             "markdown": {
                 "title": "CSDN签到通知",
-                 "text": ">CSDN 签到已成功\n - 签到详情:" + t + "#您的签到天数为："+signdays+"天\n" + "您签到获得star目前为: "+signdays+"个⭐\n" + "您的抽奖次数为:" + draws + "次\n" + "抽奖详情为："+ option +" " "-----⭐项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+                 "text": ">CSDN 签到已成功\n - **签到详情:**" + t + "\n" + "\n**您的签到天数为**："+str(signdays)+"天\n" + "\n**您签到获得star目前为**: "+str(signdays)+"个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**抽奖详情为**：" + option + "\n**您的签到总次数为**："+str(condays)+"天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
             }
         }
         res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
@@ -113,7 +115,7 @@ else:
             "msgtype": "markdown",
             "markdown": {
                 "title": "CSDN签到通知",
-                "text": ">CSDN 签到已成功\n - 签到详情:" + t + "#您的签到天数为：" + signdays + "天\n" + "您签到获得star目前为: " + signdays + "个⭐\n" + "您的抽奖次数为:" + draws + "次\n" + "-----⭐项目地址：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+                "text": ">CSDN 签到已成功\n - **签到详情:**" + t + "\n" + "\n**您的签到天数为**："+str(signdays)+"天\n" + "\n**您签到获得star目前为**: "+str(signdays)+"个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**您的签到总次数为**："+str(condays)+"天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
             }
         }
         res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求

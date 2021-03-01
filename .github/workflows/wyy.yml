@@ -1,5 +1,5 @@
 
-name: csdn
+name: '网易云签到'
 
 on:
   schedule:

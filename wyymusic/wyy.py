@@ -30,10 +30,10 @@ data = {
 }
 wyy_data = requests.post("https://music.163.com/weapi/point/dailyTask?csrf_token="+csrf_token,headers=headers,data=data)
 import json
-print(json.loads(wyy_data.text)['msg'])
+print(json.loads(wyy_data.text))
 # 获取签到详情
 wyycode = json.loads(wyy_data.text)['code']
-response = json.loads(wyy_data.text)['msg']
+# response = json.loads(wyy_data.text)['msg']
 
 # 通知模块
 import time
@@ -62,7 +62,7 @@ if wyycode == 200:
     "msgtype": "markdown",
      "markdown": {
          "title": "网易云签到通知",
-         "text": ">网易云签到 签到已成功\n - 签到详情:" + "\n" + response
+         "text": ">网易云签到 签到已成功\n - 签到详情: 签到成功"
      }
       }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)   #发送post请求
@@ -73,7 +73,7 @@ else:
         "msgtype": "markdown",
         "markdown": {
             "title": "网易云签到通知",
-            "text": "签到失败" + response
+            "text": "签到失败 \n- 签到详情: 签到成功"
         }
     }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
