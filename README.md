@@ -15,7 +15,7 @@
 
 1. csdn 签到得积分
 2. 暂定一个
-
+![效果图](https://cdn.jsdelivr.net/gh/Rr210/image@master/hexo/4/csdn39173172.webp)
 ## 使用方法
 
 1. 将以上代码中`headers`和`data`替换成你自己的
