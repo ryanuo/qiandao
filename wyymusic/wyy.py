@@ -73,7 +73,7 @@ else:
         "msgtype": "markdown",
         "markdown": {
             "title": "网易云签到通知",
-            "text": "签到失败 \n- 签到详情: 签到成功"
+            "text": "您已重复签到 \n- 不要重复签到"
         }
     }
     res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
