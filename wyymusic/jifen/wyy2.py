@@ -132,8 +132,7 @@ if object['code']==200:
         "msgtype": "markdown",
         "markdown": {
             "title": "网易云2签到信息通知",
-            "text": ">您已签到成功\n - " + "\n" + "\n签到成功，经验+" + str(
-                object['point']) + "\n" + "\n刷单成功！共" + str(count) + "首"
+            "text": ">您已签到成功\n - " + "\n" + "\n签到成功"
         }
     }
     res1 = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
