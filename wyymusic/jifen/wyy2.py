@@ -1,8 +1,32 @@
 import requests,base64,json,hashlib,os
+from Crypto.Cipher import AES
+# 通知板块
 if __name__ == '__main__':
     DDSECRET = os.environ["DDSECRET"]  # 钉钉通知加签
     DDPOSTURL = os.environ["DDPOSTURL"]  # 钉钉通知机器人的链接地址
-from Crypto.Cipher import AES
+    # 钉钉通知模块
+    import time
+    import hmac
+    import hashlib
+    import base64
+    import urllib.parse
+    import requests, json
+
+    timestamp = str(round(time.time() * 1000))
+    secret = DDSECRET
+    secret_enc = secret.encode('utf-8')
+    string_to_sign = '{}\n{}'.format(timestamp, secret)
+    string_to_sign_enc = string_to_sign.encode('utf-8')
+    hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+    sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+    # 导入依赖库
+    headers = {'Content-Type': 'application/json'}  # 定义数据类型
+    # 截至到&timestamp之前
+    webhook = DDPOSTURL + timestamp + "&sign=" + sign
+    # 定义要发送的数据
+    # "at": {"atMobiles": "['"+ mobile + "']"
+
+
 def encrypt(key, text):
     cryptor = AES.new(key.encode('utf8'), AES.MODE_CBC, b'0102030405060708')
     length = 16                    
@@ -50,8 +74,7 @@ headers2 = {
 res=s.post(url=url,data=protect(json.dumps(logindata)),headers=headers2)
 tempcookie=res.cookies
 object=json.loads(res.text)
-
-
+ddobjmsg = str(object['point'])
 if object['code']==200:
     print("登录成功！")
 else:
@@ -106,38 +129,18 @@ postdata={
 res=s.post(url,protect(json.dumps(postdata)))
 object=json.loads(res.text,strict=False)
 if object['code']==200:
-    # 钉钉通知模块
-    import time
-    import hmac
-    import hashlib
-    import base64
-    import urllib.parse
-    import requests, json
-
-    timestamp = str(round(time.time() * 1000))
-    secret = DDSECRET
-    secret_enc = secret.encode('utf-8')
-    string_to_sign = '{}\n{}'.format(timestamp, secret)
-    string_to_sign_enc = string_to_sign.encode('utf-8')
-    hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
-    sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
-    # 导入依赖库
-    headers = {'Content-Type': 'application/json'}  # 定义数据类型
-    # 截至到&timestamp之前
-    webhook = DDPOSTURL + timestamp + "&sign=" + sign
-    # 定义要发送的数据
-    # "at": {"atMobiles": "['"+ mobile + "']"
-    data = {
+    ddobjcount = str(count)
+    data1 = {
         # 定义内容
         "msgtype": "markdown",
         "markdown": {
             "title": "网易云2签到信息通知",
-            "text": ">您已签到成功\n - " + "\n" + "\n签到成功"
+            "text": ">您已签到成功\n - " + "\n" + "\n签到成功, 经验加"+ddobjmsg+"\n" + "\n刷单成功！共"+ddobjcount+"首"
         }
     }
-    res1 = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
-    print(res1.text)
     print("刷单成功！共"+str(count)+"首")
+    res1 = requests.post(webhook, data=json.dumps(data1), headers=headers)  # 发送post请求
+    print(res1.text)
     exit()
 else:
     print("发生错误："+str(object['code'])+object['message'])
