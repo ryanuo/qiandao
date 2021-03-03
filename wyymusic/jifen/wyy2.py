@@ -4,27 +4,7 @@ from Crypto.Cipher import AES
 if __name__ == '__main__':
     DDSECRET = os.environ["DDSECRET"]  # 钉钉通知加签
     DDPOSTURL = os.environ["DDPOSTURL"]  # 钉钉通知机器人的链接地址
-    # 钉钉通知模块
-    import time
-    import hmac
-    import hashlib
-    import base64
-    import urllib.parse
-    import requests, json
 
-    timestamp = str(round(time.time() * 1000))
-    secret = DDSECRET
-    secret_enc = secret.encode('utf-8')
-    string_to_sign = '{}\n{}'.format(timestamp, secret)
-    string_to_sign_enc = string_to_sign.encode('utf-8')
-    hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
-    sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
-    # 导入依赖库
-    headers = {'Content-Type': 'application/json'}  # 定义数据类型
-    # 截至到&timestamp之前
-    webhook = DDPOSTURL + timestamp + "&sign=" + sign
-    # 定义要发送的数据
-    # "at": {"atMobiles": "['"+ mobile + "']"
 
 
 def encrypt(key, text):
@@ -129,6 +109,28 @@ postdata={
 res=s.post(url,protect(json.dumps(postdata)))
 object=json.loads(res.text,strict=False)
 if object['code']==200:
+
+    # 钉钉通知模块
+    import time
+    import hmac
+    import hashlib
+    import base64
+    import urllib.parse
+    import requests, json
+
+    timestamp = str(round(time.time() * 1000))
+    secret = DDSECRET
+    secret_enc = secret.encode('utf-8')
+    string_to_sign = '{}\n{}'.format(timestamp, secret)
+    string_to_sign_enc = string_to_sign.encode('utf-8')
+    hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+    sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+    # 导入依赖库
+    ddheaders = {'Content-Type': 'application/json'}  # 定义数据类型
+    # 截至到&timestamp之前
+    webhook = DDPOSTURL + timestamp + "&sign=" + sign
+    # 定义要发送的数据
+    # "at": {"atMobiles": "['"+ mobile + "']"
     ddobjcount = str(count)
     data1 = {
         # 定义内容
@@ -139,7 +141,7 @@ if object['code']==200:
         }
     }
     print("刷单成功！共"+str(count)+"首")
-    res1 = requests.post(webhook, data=json.dumps(data1), headers=headers)  # 发送post请求
+    res1 = requests.post(webhook, data=json.dumps(data1), headers=ddheaders)  # 发送post请求
     print(res1.text)
     exit()
 else:
