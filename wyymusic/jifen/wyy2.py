@@ -137,7 +137,7 @@ if object['code']==200:
         "msgtype": "markdown",
         "markdown": {
             "title": "网易云2签到信息通知",
-            "text": ">您已签到成功\n - " + "\n" + "\n签到成功, 经验加"+ddobjmsg+"\n" + "\n刷单成功！共"+ddobjcount+"首"
+            "text": ">网易云2您已签到成功\n - " + "\n" + "\n签到成功"
         }
     }
     print("刷单成功！共"+str(count)+"首")
