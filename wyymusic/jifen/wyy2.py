@@ -54,7 +54,6 @@ headers2 = {
 res=s.post(url=url,data=protect(json.dumps(logindata)),headers=headers2)
 tempcookie=res.cookies
 object=json.loads(res.text)
-ddobjmsg = str(object['point'])
 if object['code']==200:
     print("登录成功！")
 else:
@@ -131,7 +130,6 @@ if object['code']==200:
     webhook = DDPOSTURL + timestamp + "&sign=" + sign
     # 定义要发送的数据
     # "at": {"atMobiles": "['"+ mobile + "']"
-    ddobjcount = str(count)
     data1 = {
         # 定义内容
         "msgtype": "markdown",
