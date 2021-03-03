@@ -21,13 +21,12 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: 3.7
-    - name: 授权信息
+    - name: 授权信息 && 签到
       env: 
         DDSECRET: ${{ secrets.DDSECRET }} # 钉钉机器人加签密钥
         DDPOSTURL: ${{ secrets.DDPOSTURL }} # 钉钉机器人地址
-    - name: 签到
       run: |
-        pip install -r requirements.txt
+        pip install -r wyymusic/jifen/requirements.txt
         
         user='${{ secrets.USER }}'
         pwd='${{ secrets.PWD }}'
