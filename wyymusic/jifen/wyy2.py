@@ -52,28 +52,6 @@ tempcookie=res.cookies
 object=json.loads(res.text)
 
 
-# 钉钉通知模块
-import time
-import hmac
-import hashlib
-import base64
-import urllib.parse
-import requests, json
-
-timestamp = str(round(time.time() * 1000))
-secret = DDSECRET
-secret_enc = secret.encode('utf-8')
-string_to_sign = '{}\n{}'.format(timestamp, secret)
-string_to_sign_enc = string_to_sign.encode('utf-8')
-hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
-sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
-# 导入依赖库
-headers = {'Content-Type': 'application/json'}  # 定义数据类型
-# 截至到&timestamp之前
-webhook = DDPOSTURL + timestamp + "&sign=" + sign
-# 定义要发送的数据
-# "at": {"atMobiles": "['"+ mobile + "']"
-
 if object['code']==200:
     print("登录成功！")
 else:
@@ -87,18 +65,7 @@ if object['code']!=200 and object['code']!=-2:
 else:
     if object['code'] == 200:
         print("签到成功，经验+"+str(object['point']))
-
     else:
-        data = {
-            # 定义内容
-            "msgtype": "markdown",
-            "markdown": {
-                "title": "网易云2签到信息通知",
-                "text": ">您已重复签到,请不要重复操作\n"
-            }
-        }
-        res1 = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
-        print(res1.text)
         print("重复签到")
 
 
@@ -139,6 +106,27 @@ postdata={
 res=s.post(url,protect(json.dumps(postdata)))
 object=json.loads(res.text,strict=False)
 if object['code']==200:
+    # 钉钉通知模块
+    import time
+    import hmac
+    import hashlib
+    import base64
+    import urllib.parse
+    import requests, json
+
+    timestamp = str(round(time.time() * 1000))
+    secret = DDSECRET
+    secret_enc = secret.encode('utf-8')
+    string_to_sign = '{}\n{}'.format(timestamp, secret)
+    string_to_sign_enc = string_to_sign.encode('utf-8')
+    hmac_code = hmac.new(secret_enc, string_to_sign_enc, digestmod=hashlib.sha256).digest()
+    sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
+    # 导入依赖库
+    headers = {'Content-Type': 'application/json'}  # 定义数据类型
+    # 截至到&timestamp之前
+    webhook = DDPOSTURL + timestamp + "&sign=" + sign
+    # 定义要发送的数据
+    # "at": {"atMobiles": "['"+ mobile + "']"
     data = {
         # 定义内容
         "msgtype": "markdown",
