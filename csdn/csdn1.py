@@ -7,7 +7,6 @@ if __name__ == '__main__':
     DDPOSTURL = os.environ["DDPOSTURL"]  # 钉钉通知机器人的链接地址
     LUCKYCOOKIE = os.environ["LUCKYCOOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
 
-
 headers = {
     'accept': 'application/json, text/plain, */*',
     'accept-encoding': 'gzip, deflate, br',
