@@ -45,26 +45,25 @@ isSign = timedata['data']['isSigned']
 t = timedata['data']['msg']
 print(t)  # 返回签到结果
 # 返回签到天数，如果到了5天执行csdnlucky.py
-
+signdays = timedata['data']['star']
+# print(signdays)
+# 返回抽奖次数
+draws = timedata['data']['drawTimes']
+# 如果抽奖次数有多次可以重复执行
+while draws != 0:
+    strs = ('python csdnlucky.py')
+    p = os.system(strs)
+    print("程序运行成功%s" % p)
+# 加入连续签到总天数 condays
+condays = timedata['data']['serialCount']
+# 加入签到总天数，csdn
+totalsigndays = timedata['data']['totalCount']
 
 # 判断条件
 if message == '成功' and isSign:
     text = ">您已重复签到,请不要重复操作\n - 签到详情:\n" + t
 else:
     # 返回签到天数，如果到了5天执行csdnlucky.py
-    signdays = timedata['data']['star']
-    # print(signdays)
-    # 返回抽奖次数
-    draws = timedata['data']['drawTimes']
-    # 如果抽奖次数有多次可以重复执行
-    while draws != 0:
-        strs = ('python csdnlucky.py')
-        p = os.system(strs)
-        print("程序运行成功%s" % p)
-    # 加入连续签到总天数 condays
-    condays = timedata['data']['serialCount']
-    # 加入签到总天数，csdn
-    totalsigndays = timedata['data']['totalCount']
     # 加入抽奖判断 执行抽奖
     if signdays == 5:
         # import os

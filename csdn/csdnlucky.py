@@ -1,9 +1,8 @@
 import requests
 import os
-from csdn1 import LUCKYCOOKIE
 if __name__ == '__main__':
     USERNAME = os.environ["USERNAME"]  # 这里是’CSDN‘的用户名，链接后面的
-    # LUCKYCOOKIE = os.environ["LUCKYCOOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
+    LUCKYCOOKIE = os.environ["LUCKYCOOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
 
 # 第一步获取请求数据
 headers = {
