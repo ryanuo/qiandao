@@ -85,7 +85,8 @@ def draw():
     option = json.loads(getpost)['data']['msg']
     # 获取抽奖详情
     print(option)
-
+    global text
+    text = "\n**抽奖详情为**：" + option
 # 判断条件
 if message == '成功' and isSign:
     text = ">您已重复签到,请不要重复操作\n - 签到详情:\n" + t
@@ -113,7 +114,7 @@ else:
         # strs = ('python csdnlucky.py')  # python命令 + csdnlucky.py
         # p = os.system(str)
         # print(p)  # 打印执行结果 0表示 success ， 1表示 fail
-        text =">CSDN 签到已成功\n - **签到详情**:" + t + "\n" + "\n**您的签到天数为**："+str(signdays)+"天\n" + "\n**您签到获得star目前为**: "+str(signdays)+"个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**抽奖详情为**：" + option + "\n**您的连续签到总次数为**："+str(condays)+"天\n" +"\n**您的签到总次数为**："+str(totalsigndays)+"天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+        text =">CSDN 签到已成功\n - **签到详情**:" + t + "\n" + "\n**您的签到天数为**："+str(signdays)+"天\n" + "\n**您签到获得star目前为**: "+str(signdays)+"个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**您的连续签到总次数为**："+str(condays)+"天\n" +"\n**您的签到总次数为**："+str(totalsigndays)+"天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
     else:
         text =">CSDN 签到已成功\n - **签到详情**:" + t + "\n" + "\n**您的签到天数为**："+str(signdays)+"天\n" + "\n**您签到获得star目前为**: "+str(signdays)+"个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**您的连续签到总次数为**："+str(condays)+"天\n" + "\n**您的签到总次数为**："+str(totalsigndays)+"天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
 
