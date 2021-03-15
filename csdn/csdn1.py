@@ -1,5 +1,7 @@
 import requests
-import os  #加入环境变量
+import os  # 加入环境变量
+import json
+from csdnlucky import option
 if __name__ == '__main__':
     COOKIE = os.environ["COOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
     USERNAME = os.environ["USERNAME"]  # 这里是’CSDN‘的用户名，链接后面的
@@ -34,7 +36,6 @@ data = {
 
 r = requests.post("https://me.csdn.net/api/LuckyDraw_v2/signIn",headers=headers,data=data).content.decode("unicode_escape")
 print(r)  # 输出结果
-import json
 timedata = json.loads(r)
 # 将json转化为数组形式
 print(timedata)
@@ -46,6 +47,33 @@ print(t)  # 返回签到结果
 # 返回签到天数，如果到了5天执行csdnlucky.py
 
 
+# 判断条件
+if message == '成功' and isSign:
+    text = ">您已重复签到,请不要重复操作\n - 签到详情:\n" + t
+else:
+    # 返回签到天数，如果到了5天执行csdnlucky.py
+    signdays = timedata['data']['star']
+    # print(signdays)
+    # 返回抽奖次数
+    draws = timedata['data']['drawTimes']
+    # 如果抽奖次数有多次可以重复执行
+    while draws != 0:
+        strs = ('python csdnlucky.py')
+        p = os.system(strs)
+        print("程序运行成功%s" % p)
+    # 加入连续签到总天数 condays
+    condays = timedata['data']['serialCount']
+    # 加入签到总天数，csdn
+    totalsigndays = timedata['data']['totalCount']
+    # 加入抽奖判断 执行抽奖
+    if signdays == 5:
+        # import os
+        # strs = ('python csdnlucky.py')  # python命令 + csdnlucky.py
+        # p = os.system(str)
+        # print(p)  # 打印执行结果 0表示 success ， 1表示 fail
+        text =">CSDN 签到已成功\n - **签到详情**:" + t + "\n" + "\n**您的签到天数为**："+str(signdays)+"天\n" + "\n**您签到获得star目前为**: "+str(signdays)+"个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**抽奖详情为**：" + option + "\n**您的连续签到总次数为**："+str(condays)+"天\n" +"\n**您的签到总次数为**："+str(totalsigndays)+"天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
+    else:
+        text =">CSDN 签到已成功\n - **签到详情**:" + t + "\n" + "\n**您的签到天数为**："+str(signdays)+"天\n" + "\n**您签到获得star目前为**: "+str(signdays)+"个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**您的连续签到总次数为**："+str(condays)+"天\n" + "\n**您的签到总次数为**："+str(totalsigndays)+"天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
 
 # 钉钉通知模块
 import time
@@ -68,58 +96,16 @@ headers = {'Content-Type': 'application/json'}  # 定义数据类型
 webhook = DDPOSTURL + timestamp + "&sign=" + sign
 # 定义要发送的数据
 # "at": {"atMobiles": "['"+ mobile + "']"
-if message == '成功' and isSign:
-    data = {
-    #定义内容
+data = {
+    # 定义内容
     "msgtype": "markdown",
-     "markdown": {
-         "title":"CSDN签到通知",
-         "text": ">您已重复签到,请不要重复操作\n - 签到详情:\n" + t
-     }
-      }
-    res = requests.post(webhook, data=json.dumps(data), headers=headers)   #发送post请求
-    print(res.text)
-    # from csdnlucky import option # 测试时使用
-    # print(option)
-
-else:
-    # 返回签到天数，如果到了5天执行csdnlucky.py
-    signdays = timedata['data']['star']
-    # print(signdays)
-    # 返回抽奖次数
-    draws = timedata['data']['drawTimes']
-    # 加入连续签到总天数 condays
-    condays = timedata['data']['serialCount']
-    # 加入签到总天数，csdn
-    totalsigndays = timedata['data']['totalCount']
-    # 加入抽奖判断 执行抽奖
-    if signdays == 5:
-        import os
-        # strs = ('python csdnlucky.py')  # python命令 + csdnlucky.py
-        # p = os.system(str)
-        # print(p)  # 打印执行结果 0表示 success ， 1表示 fail
-        from csdnlucky import option
-        data = {
-            # 定义内容
-            "msgtype": "markdown",
-            "markdown": {
-                "title": "CSDN签到通知",
-                 "text": ">CSDN 签到已成功\n - **签到详情**:" + t + "\n" + "\n**您的签到天数为**："+str(signdays)+"天\n" + "\n**您签到获得star目前为**: "+str(signdays)+"个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**抽奖详情为**：" + option + "\n**您的连续签到总次数为**："+str(condays)+"天\n" +"\n**您的签到总次数为**："+str(totalsigndays)+"天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
-            }
-        }
-        res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
-        print(res.text)
-    else:
-        data = {
-            # 定义内容
-            "msgtype": "markdown",
-            "markdown": {
-                "title": "CSDN签到通知",
-                "text": ">CSDN 签到已成功\n - **签到详情**:" + t + "\n" + "\n**您的签到天数为**："+str(signdays)+"天\n" + "\n**您签到获得star目前为**: "+str(signdays)+"个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**您的连续签到总次数为**："+str(condays)+"天\n" + "\n**您的签到总次数为**："+str(totalsigndays)+"天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
-            }
-        }
-        res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
-        print(res.text)
+    "markdown": {
+        "title": "CSDN签到通知",
+        "text": text
+    }
+}
+res = requests.post(webhook, data=json.dumps(data), headers=headers)  # 发送post请求
+print(res.text)
 
 
 
