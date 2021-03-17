@@ -100,9 +100,8 @@ else:
     draws = timedata['data']['drawTimes']
     # 如果抽奖次数有多次可以重复执行
     while draws != 0:
-        strs = ('python csdnlucky.py')
-        p = os.system(strs)
-        print("程序运行成功%s" % p)
+        draw()
+        print('抽奖成功')
     # 加入连续签到总天数 condays
     condays = timedata['data']['serialCount']
     # 加入签到总天数，csdn

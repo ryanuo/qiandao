@@ -31,4 +31,3 @@ jobs:
 
       run: |
         python csdn/csdn1.py
-#        python csdn/csdnlucky.py
