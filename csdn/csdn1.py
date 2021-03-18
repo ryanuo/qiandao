@@ -46,7 +46,7 @@ print(t)  # 返回签到结果
 
 
 ## 抽奖
-def draw():
+def draw(LUCKYCOOKIE,USERNAME):
     # 第一步获取请求数据
     headers = {
         'accept': 'application/json, text/plain, */*',
@@ -100,7 +100,8 @@ else:
     draws = timedata['data']['drawTimes']
     # 如果抽奖次数有多次可以重复执行
     while draws != 0:
-        draw()
+        # 执行抽奖函数
+        draw(LUCKYCOOKIE,USERNAME)
         print('抽奖成功')
     # 加入连续签到总天数 condays
     condays = timedata['data']['serialCount']
