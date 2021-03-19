@@ -11,7 +11,8 @@ if __name__ == '__main__':
     USERNAME = os.environ["USERNAME"]  # 这里是’CSDN‘的用户名，链接后面的
     DDSECRET = os.environ["DDSECRET"]  # 钉钉通知加签
     DDPOSTURL = os.environ["DDPOSTURL"]  # 钉钉通知机器人的链接地址
-    LUCKYCOOKIE = os.environ["LUCKYCOOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
+    LUCKYCOOKIE = os.environ["LUCKYCOOKIE"] # 点击签到后在控制台从heard里面找到COOKIE
+    LUCKYCC = os.environ["LUCKYCC"]
 
 headers = {
     'accept': 'application/json, text/plain, */*',
@@ -53,7 +54,7 @@ t = timedata['data']['msg']
 
 # 抽奖
 
-def draw(LUCKYCOOKIE, USERNAME):
+def draw(LUCKYCC, USERNAME):
     # 第一步获取请求数据
     headers = {
         'accept': 'application/json, text/plain, */*',
@@ -62,7 +63,7 @@ def draw(LUCKYCOOKIE, USERNAME):
         'cache-control': 'no-cache',
         'content-length': '246',
         'content-type': 'application/json;charset=UTF-8',
-        'cookie': LUCKYCOOKIE,
+        'cookie': LUCKYCC,
         'origin': 'https://i.csdn.net',
         'pragma': 'no-cache',
         'referer': 'https://i.csdn.net/',
@@ -82,7 +83,7 @@ def draw(LUCKYCOOKIE, USERNAME):
         'uuid': "10_10212595300-1608558661367-119405"
     }
     # 第二步 post请求
-    getpost = requests.post("https://me.csdn.net/api/LuckyDraw_v2/goodLuck",headers=headers,data=data).content.decode("unicode_escape")
+    getpost = requests.post("https://me.csdn.net/api/LuckyDraw_v2/goodLuck", headers=headers, data=data).content.decode("unicode_escape")
     # 输出请求结果
     print(getpost)
     # print(type(getpost))  # 输出字符串形式
@@ -115,15 +116,15 @@ else:
     try:
         while draws != 0:
             # 执行抽奖函数
-            draw(LUCKYCOOKIE, USERNAME)
-            print('抽奖成功')
+            draw(LUCKYCC, USERNAME)
+            print('------->抽奖成功')
     except IOError:
         text = '抽奖失败'
         print('抽奖失败')
     else:
         if signdays == 5:
             # 执行抽奖命令
-            draw(LUCKYCOOKIE, USERNAME)
+            draw(LUCKYCC, USERNAME)
             text = ">CSDN 签到已成功\n - **签到详情**:" + t + "\n" + "\n**您的签到天数为**：" + str(signdays) + "天\n" + "\n**您签到获得star目前为**: " + str(signdays) + "个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**您的连续签到总次数为**：" + str(condays) + "天\n" + "\n**您的签到总次数为**：" + str(totalsigndays) + "天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
         else:
             text = ">CSDN 签到已成功\n - **签到详情**:" + t + "\n" + "\n**您的签到天数为**：" + str(signdays) + "天\n" + "\n**您签到获得star目前为**: " + str(signdays) + "个⭐\n" + "\n**您的抽奖次数为**:" + str(draws) + "次\n" + "\n**您的连续签到总次数为**：" + str(condays) + "天\n" + "\n**您的签到总次数为**：" + str(totalsigndays) + "天\n" + "\n-----⭐**项目地址**：[https://github.com/Rr210/qiandao](https://github.com/Rr210/qiandao)"
