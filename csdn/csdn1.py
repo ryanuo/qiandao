@@ -50,8 +50,6 @@ isSign = timedata['data']['isSigned']
 t = timedata['data']['msg']
 # print(t)  # 返回签到结果
 
-
-
 # 抽奖
 
 def draw(LUCKYCC, USERNAME):
@@ -90,11 +88,11 @@ def draw(LUCKYCC, USERNAME):
     import json
     # 将已编码的 JSON 字符串解码为 Python 对象 字典
     # print(type(json.loads(getpost)))  # 返回形式字典
-    option = json.loads(getpost)['data']['msg']
+    # option = json.loads(getpost)['data']['msg']
     # 获取抽奖详情
-    print(option)
+    print(getpost)
     global text
-    text = "\n**抽奖详情为**：" + option
+    text = "\n**抽奖详情为**：\n" + getpost
 
 
 # 判断条件
