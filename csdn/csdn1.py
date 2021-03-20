@@ -6,6 +6,8 @@ import base64
 import urllib.parse
 import requests, json
 
+LUCKYCC = ''
+
 if __name__ == '__main__':
     COOKIE = os.environ["COOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
     USERNAME = os.environ["USERNAME"]  # 这里是’CSDN‘的用户名，链接后面的
@@ -13,6 +15,7 @@ if __name__ == '__main__':
     DDPOSTURL = os.environ["DDPOSTURL"]  # 钉钉通知机器人的链接地址
     LUCKYCOOKIE = os.environ["LUCKYCOOKIE"] # 点击签到后在控制台从heard里面找到COOKIE
     LUCKYCC = os.environ["LUCKYCC"]
+
 
 headers = {
     'accept': 'application/json, text/plain, */*',
