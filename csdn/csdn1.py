@@ -81,7 +81,7 @@ def draw(LUCKYCC, USERNAME):
         'product': "pc",
         'user_agent': "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.150 Safari/537.36",
         'username': USERNAME,
-        'uuid': "10_10212595300-1608558661367-119405"
+        'uuid': "10_19718702780-1615518137009-545439"
     }
     # 第二步 post请求
     getpost = requests.post("https://me.csdn.net/api/LuckyDraw_v2/goodLuck", headers=headers, data=data).content.decode("unicode_escape")
@@ -115,7 +115,7 @@ else:
     # 加入签到总天数，csdn
     totalsigndays = timedata['data']['totalCount']
     try:
-        while draws != 0:
+        if draws != 0:
             # 执行抽奖函数
             draw(LUCKYCC, USERNAME)
             print('------->抽奖成功')
