@@ -7,6 +7,7 @@ import urllib.parse
 import requests, json
 
 LUCKYCC = ''
+session = requests.session()
 
 if __name__ == '__main__':
     COOKIE = os.environ["COOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
@@ -42,7 +43,7 @@ data = {
     'uuid': '10_10212595300-1608558661367-119405',
 }
 
-r = requests.post("https://me.csdn.net/api/LuckyDraw_v2/signIn", headers=headers, data=data).content.decode("unicode_escape")
+r = session.post("https://me.csdn.net/api/LuckyDraw_v2/signIn", headers=headers, data=data).content.decode("unicode_escape")
 # print(r)  # 输出结果
 timedata = json.loads(r)
 # 将json转化为数组形式
@@ -84,7 +85,7 @@ def draw(LUCKYCC, USERNAME):
         'uuid': "10_19718702780-1615518137009-545439"
     }
     # 第二步 post请求
-    getpost = requests.post("https://me.csdn.net/api/LuckyDraw_v2/goodLuck", headers=headers, data=data).content.decode("unicode_escape")
+    getpost = session.post("https://me.csdn.net/api/LuckyDraw_v2/goodLuck").content.decode("unicode_escape")
     # 输出请求结果
     print(getpost)
     # print(type(getpost))  # 输出字符串形式
