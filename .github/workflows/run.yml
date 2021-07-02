@@ -23,7 +23,7 @@ jobs:
         python-version: 3.7
     - name: 授权信息 && 签到
       env: 
-        QQ_SEND: ${{ secrets.QQ_SEND }} # 钉钉机器人加签密钥
+        DD_SECRET: ${{ secrets.DD_SECRET }} # 钉钉机器人加签密钥
         DD_POSTURL: ${{ secrets.DD_POSTURL }} # 钉钉机器人地址
       run: |
         pip install -r wyymusic/jifen/requirements.txt
