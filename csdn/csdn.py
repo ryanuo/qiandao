@@ -85,7 +85,7 @@ class Csdn:
         sckey = SERVER_SCKEY  # 在发送消息页面可以找到
         title = 'csdn签到详情'
         text = r + t
-        url = f'https://sc.ftqq.com/%{sckey}.send?text={title}&desp={text}'
+        url = f'https://sc.ftqq.com/{sckey}.send?text={title}&desp={text}'
         requests.get(url)
 
 
