@@ -75,11 +75,18 @@ class Csdn:
         '''
         msg.attach(MIMEText(content, 'html', 'utf-8'))  # 把内容加进去
         # msg.attach(MIMEText(conntent, 'plain', 'utf-8'))  # 把内容加进去
-        msg['Subject'] = "数据库更新通知"  # 设置邮件主题
+        msg['Subject'] = "csdn更新通知"  # 设置邮件主题
         msg['From'] = msg_from  # 发送方信息
         s = smtplib.SMTP_SSL("smtp.qq.com", 465)  # 开始发送  通过SSL方式发送，服务器地址和端口
         s.login(msg_from, passwd)  # 登录邮箱
         s.sendmail(msg_from, to, msg.as_string())  # 开始发送
+
+    def server_girl(self):
+        sckey = SERVER_SCKEY  # 在发送消息页面可以找到
+        title = 'csdn签到详情'
+        text = r + t
+        url = f'https://sc.ftqq.com/%{sckey}.send?text={title}&desp={text}'
+        requests.get(url)
 
 
 if __name__ == "__main__":
@@ -90,9 +97,12 @@ if __name__ == "__main__":
     DD_POSTURL = os.environ["DD_POSTURL"]  # 钉钉通知机器人的链接地址
     QQ_SEND = os.environ['QQ_SEND']  # qq发件人信息格式  邮箱+smtp码 比如：iui9@qq.com+********(加号为分隔符)
     QQ_ACCEPT = os.environ['QQ_ACCEPT']  # qq收件人邮箱地址
+    SERVER_SCKEY = os.environ['SERVER_SCKEY']  # server酱key密钥
     t = str(Csdn().draws())
     r = str(Csdn().signed())
     if len(QQ_ACCEPT) != 0:
         Csdn().QQ_notice()
     if len(DD_SECRET) != 0:
         Csdn().notice()
+    if len(SERVER_SCKEY) != 0:
+        Csdn().server_girl()
