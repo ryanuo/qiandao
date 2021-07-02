@@ -24,19 +24,20 @@
 ## Github配置
 
 1. 将你的COOKIE和USERNAME 保存替换成以上样式，记得保存好COOKIE，将COOKIE使用环境变量放到GitHub仓库的secrets里面，如图所示
-2. 修改代码第15行，第31行，第56行，第65行  将自己的信息修改
 ![](https://cdn.jsdelivr.net/gh/Rr210/image@master/hexo/4/csdnpyrr.webp)
 2. 各个参数介绍
 
 |  Secrets  |                           参数介绍                           |
 | :-------: | :----------------------------------------------------------: |
-|  COOKIE   |       这个时签到csdn所需的COOKIE，识别用户身份必须获得       |
 | USERNAME  |                       你的CSDN的用户名                       |
-| DDPOSTURL | 钉钉群机器人的webhook地址，参考钉钉[官方文档](https://developers.dingtalk.com/document/app/custom-robot-access) |
-| DDSECRET  |                  设置钉钉机器人时的加签密钥                  |
-| LUCKYCOOLKIE| 执行抽奖时所需的COOKIR，获取方法与签到的cookie相同|
+| DD_POSTURL | 钉钉群机器人的webhook地址，参考钉钉[官方文档](https://developers.dingtalk.com/document/app/custom-robot-access) |
+| DD_SECRET  |                  设置钉钉机器人时的加签密钥                  |
+| COOKIE_DRAW| 执行抽奖时所需的COOKIR，获取方法与签到的cookie相同|
+| COOKIE_SIGNED| 执行签到时所需的COOKIR，获取方法与签到的cookie相同|
 | WYYCOOKIE| 获取方法相同|
 | WYYCSRFTOKEN| 在控制台获取 csrf_token 的值|
+| QQ_SEND|  qq发件人信息格式  邮箱+smtp码 比如：iui9@qq.com+********(加号为分隔符)|
+| QQ_ACCEPT| qq收件人邮箱|
 
 ## 设置定时
 

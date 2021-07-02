@@ -3,8 +3,8 @@ import os
 if __name__ == '__main__':
     WYYCOOKIE = os.environ["WYYCOOKIE"]  # 点击签到后在控制台从heard里面找到COOKIE
     WYYCSRFTOKEN = os.environ["WYYCSRFTOKEN"]
-    DDSECRET = os.environ["DDSECRET"]  # 钉钉通知加签
-    DDPOSTURL = os.environ["DDPOSTURL"]
+    DD_SECRET = os.environ["DD_SECRET"]  # 钉钉通知加签
+    DD_POSTURL = os.environ["DD_POSTURL"]
 headers = {
     'accept': '*/*',
     'accept-encoding': 'gzip, deflate, br',
@@ -44,7 +44,7 @@ import urllib.parse
 import requests, json
 
 timestamp = str(round(time.time() * 1000))
-secret = DDSECRET
+secret = DD_SECRET
 secret_enc = secret.encode('utf-8')
 string_to_sign = '{}\n{}'.format(timestamp, secret)
 string_to_sign_enc = string_to_sign.encode('utf-8')
@@ -53,7 +53,7 @@ sign = urllib.parse.quote_plus(base64.b64encode(hmac_code))
 # 导入依赖库
 headers = {'Content-Type': 'application/json'}  # 定义数据类型
 # 截至到&timestamp之前
-webhook = DDPOSTURL + timestamp + "&sign=" + sign
+webhook = DD_POSTURL + timestamp + "&sign=" + sign
 # 定义要发送的数据
 # "at": {"atMobiles": "['"+ mobile + "']"
 if wyycode == 200:

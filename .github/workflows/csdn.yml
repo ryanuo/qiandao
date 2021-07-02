@@ -23,12 +23,13 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: 'run py'
       env:
-        COOKIE: ${{ secrets.COOKIE }}  #csdn 请求服务器后返回的，确认身份必备 签到
-        LUCKYCOOKIE: ${{ secrets.LUCKLYCOOKIE }}  #csdn 请求服务器后返回的，确认身份必备 抽奖
-        LUCKYCC: ${{ secrets.LUCKLYCC }}
+        COOKIE_DRAW: ${{ secrets.COOKIE_DRAW }}  #csdn 请求服务器后返回的，确认身份必备 抽奖
+        COOKIE_SIGNED: ${{ secrets.COOKIE_SIGNED }}  #csdn 请求服务器后返回的，确认身份必备 签到
         USERNAME: ${{ secrets.USERNAME }} # 用户名
-        DDSECRET: ${{ secrets.DDSECRET }} # 钉钉机器人加签密钥
-        DDPOSTURL: ${{ secrets.DDPOSTURL }} # 钉钉机器人地址
+        DD_SECRET: ${{ secrets.DD_SECRET }} # 钉钉机器人加签密钥
+        DD_POSTURL: ${{ secrets.DD_POSTURL }} # 钉钉机器人地址
+        QQ_SEND: ${{ secrets.QQ_SEND }} # qq发件人信息格式  邮箱+smtp码 比如：iui9@qq.com+********(加号为分隔符)
+        QQ_ACCEPT: ${{ secrets.QQ_SEND }} # qq收件人邮箱地址
 
       run: |
-        python csdn/csdn1.py
+        python csdn/csdn.py
