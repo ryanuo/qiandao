@@ -30,6 +30,7 @@ jobs:
         DD_POSTURL: ${{ secrets.DD_POSTURL }} # 钉钉机器人地址
         QQ_SEND: ${{ secrets.QQ_SEND }} # qq发件人信息格式  邮箱+smtp码 比如：iui9@qq.com+********(加号为分隔符)
         QQ_ACCEPT: ${{ secrets.QQ_ACCEPT }} # qq收件人邮箱地址
+        SERVER_SCKEY: ${{ secrets.SERVER_SCKEY }}  # server酱key密钥
 
       run: |
         python csdn/csdn.py
